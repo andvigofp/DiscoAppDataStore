@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DiscoAppDataStore</string>
+    <string name="back_button">Volver</string>
+</resources>
