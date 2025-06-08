@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.discoappdatastore.ui.screens.AddDiscoScreen
 import com.example.discoappdatastore.ui.screens.DetalleScreen
+import com.example.discoappdatastore.ui.screens.EditDiscoScreen
 import com.example.discoappdatastore.ui.screens.HomeScreen
 import com.example.discoappdatastore.ui.state.DiscoViewModel
 
@@ -26,6 +27,9 @@ fun ListaDiscosApp(viewModel: DiscoViewModel) {
                 },
                 onAddClick = {
                     navController.navigate(DiscosScreen.AddDiscoScreen.route)
+                },
+                onEditClick = { discoId ->
+                    navController.navigate(DiscosScreen.EditDiscoScreen.createRoute(discoId))
                 }
             )
         }
@@ -43,6 +47,17 @@ fun ListaDiscosApp(viewModel: DiscoViewModel) {
         composable(DiscosScreen.AddDiscoScreen.route) {
             AddDiscoScreen(
                 viewModel = viewModel,
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(
+            route = DiscosScreen.EditDiscoScreen.route,
+            arguments = listOf(navArgument("discoId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val discoId = backStackEntry.arguments?.getInt("discoId") ?: 0
+            EditDiscoScreen(
+                viewModel = viewModel,
+                discoId = discoId,
                 onBack = { navController.popBackStack() }
             )
         }

@@ -6,4 +6,7 @@ sealed class DiscosScreen(val route: String) {
     object DetalleScreen : DiscosScreen("detalle_disco/{discoId}") {
         fun createRoute(discoId: Int) = "detalle_disco/$discoId"
     }
+    object EditDiscoScreen : DiscosScreen("edit_disco/{discoId}") {
+        fun createRoute(discoId: Int) = "edit_disco/$discoId"
+    }
 }
